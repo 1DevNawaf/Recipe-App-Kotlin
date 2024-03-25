@@ -30,7 +30,7 @@ class MainViewModel : ViewModel() {
                 // we use copy to make a list same as the original list but we override some of the values
                 _categoriesState.value = _categoriesState.value.copy(
                     loading = false,
-                    error("Error fetching Categories : ${e.message}")
+                    error = "Error fetching Categories : ${e.message}"
                 )
             }
         }
