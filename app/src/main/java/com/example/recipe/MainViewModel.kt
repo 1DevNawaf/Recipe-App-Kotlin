@@ -1,5 +1,6 @@
 package com.example.recipe
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -20,7 +21,7 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = recipeService.getCategories()
-                _categoriesState.value.copy(
+                _categoriesState.value=_categoriesState.value.copy(
                     list = response.categories,
                     loading = false,
                     error = null

@@ -13,3 +13,22 @@ interface ApiService {
     @GET("categories.php") //here we put what part of our baseURL we will get
     suspend fun getCategories():CategoriesResponse
 }
+
+
+
+fun test(callableFunc : ()->Unit = {}){
+    callableFunc()
+}
+
+fun testAltest(){
+    var rr = classTest()
+
+    test(
+        callableFunc = rr.testVar
+    )
+}
+
+class classTest{
+    var testVar = {}
+
+}
