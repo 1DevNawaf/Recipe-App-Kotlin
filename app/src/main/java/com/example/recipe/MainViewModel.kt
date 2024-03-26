@@ -13,6 +13,7 @@ class MainViewModel : ViewModel() {
     val categoriesState : State<RecipeState> = _categoriesState //expose value only to external classes
 
     init {
+        //launching a coroutine at the init
         fetchCategories()
     }
 
@@ -21,6 +22,7 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = recipeService.getCategories()
+                // we use copy to make a list same as the original list but we override some of the values
                 _categoriesState.value=_categoriesState.value.copy(
                     list = response.categories,
                     loading = false,
@@ -28,7 +30,6 @@ class MainViewModel : ViewModel() {
                 )
 
             }catch (e: Exception){
-                // we use copy to make a list same as the original list but we override some of the values
                 _categoriesState.value = _categoriesState.value.copy(
                     loading = false,
                     error = "Error fetching Categories : ${e.message}"

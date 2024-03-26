@@ -33,7 +33,7 @@ fun RecipeScreen(modifier: Modifier = Modifier) {
     val viewState by recipeViewModel.categoriesState
     Box(modifier = Modifier.fillMaxSize()){
         when{
-            //when the lis is loading
+            //when the list is loading
             viewState.loading ->CircularProgressIndicator(modifier.align(Alignment.Center))
 
             //when there is an error
