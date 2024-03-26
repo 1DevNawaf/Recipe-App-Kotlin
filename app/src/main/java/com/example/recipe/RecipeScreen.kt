@@ -1,6 +1,9 @@
 package com.example.recipe
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -9,12 +12,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -46,8 +51,7 @@ fun RecipeScreen(modifier: Modifier = Modifier) {
 //the group of all items
 @Composable
 fun CategoryList(categories:List<Category>) {
-    LazyVerticalGrid(GridCells.Fixed(2), modifier = Modifier.fillMaxSize()) 
-    {
+    LazyVerticalGrid(GridCells.Fixed(2), modifier = Modifier.fillMaxSize().padding(4.dp)) {
         items(items = categories){
             category ->
             CategoryItem(category = category)
@@ -62,7 +66,8 @@ fun CategoryItem(category: Category) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(8.dp),
+            .padding(8.dp)
+            .border(shape = RoundedCornerShape(15.dp),border = BorderStroke(2.dp, Color(0XFF99aab5))),
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Image(
@@ -76,7 +81,7 @@ fun CategoryItem(category: Category) {
             text =category.strCategory,
             color = Color.Black,
             style = TextStyle(fontWeight = FontWeight.Bold),
-            modifier = Modifier.padding(top = 4.dp)
+            modifier = Modifier.padding(4.dp)
         )
     }
 }
