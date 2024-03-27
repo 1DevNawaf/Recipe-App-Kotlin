@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -28,7 +29,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 
 @Composable
-fun RecipeScreen(modifier: Modifier = Modifier) {
+fun RecipeScreen(modifier: Modifier = Modifier,navigateToDetail:(Category)->Unit) {
     val recipeViewModel : MainViewModel = viewModel()
     val viewState by recipeViewModel.categoriesState
     Box(modifier = Modifier.fillMaxSize()){
@@ -41,7 +42,7 @@ fun RecipeScreen(modifier: Modifier = Modifier) {
 
             //here we display the full list
             else ->{
-                CategoryList(categories = viewState.list)
+                CategoryList(categories = viewState.list,navigateToDetail)
             }
         }
     }
@@ -50,11 +51,11 @@ fun RecipeScreen(modifier: Modifier = Modifier) {
 
 //the group of all items
 @Composable
-fun CategoryList(categories:List<Category>) {
+fun CategoryList(categories:List<Category>,navigateToDetail:(Category)->Unit) {
     LazyVerticalGrid(GridCells.Fixed(2), modifier = Modifier.fillMaxSize().padding(4.dp)) {
         items(items = categories){
             category ->
-            CategoryItem(category = category)
+            CategoryItem(category = category,navigateToDetail)
         }
     }
 }
@@ -62,12 +63,13 @@ fun CategoryList(categories:List<Category>) {
 
 //the look of each item
 @Composable
-fun CategoryItem(category: Category) {
+fun CategoryItem(category: Category,navigateToDetail:(Category)->Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(8.dp)
-            .border(shape = RoundedCornerShape(15.dp),border = BorderStroke(2.dp, Color(0XFF99aab5))),
+            .border(shape = RoundedCornerShape(15.dp),border = BorderStroke(2.dp, Color(0XFF99aab5)))
+            .clickable { navigateToDetail(category) },
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Image(
