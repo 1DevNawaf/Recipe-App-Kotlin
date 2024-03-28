@@ -15,6 +15,7 @@ fun RecipeApp(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screen.RecipeScreen.route){
         composable(Screen.RecipeScreen.route){
             RecipeScreen(viewState=viewState, navigateToDetail ={
+                //(it) is an entire category object to we need to serialize it(make it parcelable)
                 navController.currentBackStackEntry?.savedStateHandle?.set("cat",it)
                 navController.navigate(Screen.DetailScreen.route)
                 /*
